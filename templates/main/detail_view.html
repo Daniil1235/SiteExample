@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %} 
+Главная
+{% endblock %}
+
+{% block body %}
+    <div class="features">
+    <img src="/static/main/img/cars/{{ car.id }}.jpg" alt="{{ car.name }}" width="700">
+    <h1>{{ car.name }}</h1>
+    <p>{{ car.mark }}  {{ car.model }}</p>
+    <p>Цвет: {{ car.color }}</p>    
+    <p>Дата выхода: <i>{{ car.date }}</i></p>
+    <p>В наличии: {{ car.stock }}</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "main/base.html" %}
+{% block title %}Категории{% endblock %}
+{% block body %}
+    <h1>Категории</h1>
+    {% if categorys %}
+        {% for category in categorys %}
+            <div class="container-fluid align-right">
+                <a href="/category/{{ category.id }}"><img src="/static/main/img/category/{{ category.id }}.jpg" alt="{{ category.name }} " width="250"></a>
+                <h3>{{ category.name }}</h3>
+                <h4>{{ category.short_description }}</h4>
+                <a class="btn btn-outline-secondary" href="/category/{{ category.id }}">Просмотреть</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h3>Ещё нет категорий...</h3>
+    {% endif %}
+{% endblock %}

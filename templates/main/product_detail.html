@@ -1,0 +1,30 @@
+{% extends "main/base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block body %}
+    <h1>Категории</h1>
+        <div class="container-fluid align-right">
+            <a href="/static/main/img/phones/{{ product.id }}.jpg"><img src="/static/main/img/phones/{{ product.id }}.jpg" alt="{{ product.name }} " width="250"></a>
+            <h3>{{ product.name }}</h3>
+            <h4> Цена: <i>{{ product.price }}</i></h4>
+            <h5>{{ product.color }}</h5>
+            <p>{{ product.description }}</p>
+            {% if product.stock == True %}
+                <p>Есть в наличии</p>
+            {% else %}
+                <p>Нет в наличии</p>
+            {% endif %}
+            <p>Дата появления на сайте: {{ product.date }}</p>
+            {% for category in product.category.all %}
+                <div style="float: right;" class="">
+                    <h4>Категория: {{ category.name }} ㅤ</h4>
+                    <a class="btn btn-outline-warning" href="/category/{{ category.id }}">Смотреть другие товары</a>
+                    </div>
+            {% endfor %}
+            {% for manufacturer in product.manufacturer.all %}
+                <div style="float: right;" class="">
+                    <h4>Бренд/изготовитель: {{ manufacturer.name }} ㅤ</h4>
+                    <a class="btn btn-outline-danger" href="/manufacturer/{{ manufacturer.id }}">Смотреть другие товары</a>
+                    </div>
+            {% endfor %}
+        </div>
+{% endblock %}
