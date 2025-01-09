@@ -11,7 +11,7 @@
 <body>
 <nav class=" navbar navbar-expand navbar-dark bg-dark">
   <div class="container-fluid align-right">
-    <a class="navbar-brand" href="#">Магазин</a>
+    <a class="navbar-brand" href="#">Заметки</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,16 +19,10 @@
     <div class="collapse navbar-collapse" id="navbarsExample02">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" aria-current="page" href="/">Новое сегодня</a>
+          <a class="nav-link" aria-current="page" href="/">Всё</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/category/">Категории</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/manufacturer/">Изготовители</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/product/">Все продукты</a>
+          <a class="nav-link" href="/category/">Сегодня</a>
         </li>
       </ul>
       <form>
@@ -36,6 +30,7 @@
       </form>
     </div>
       <a href="/admin/" class="btn btn-outline-info">Админка</a> <p>_</p>
+      <a href="{% url 'create' %}" class="btn btn-warning">Создать</a> <p>_</p>
   </div>
 </nav>
 
