@@ -6,6 +6,9 @@
 {% block body %}
 <div class="container mt-5">
     <h1>Добавление задачи</h1>
+    {% if error %}
+        <p class="errornote">{{ error }}</p>
+    {% endif %}
     <form method="post">
         {% csrf_token %}
         {% for el in form %}
@@ -17,21 +20,6 @@
             {% endif %}
             {{ el }}<br>
         {% endfor %}
-        {% comment %}
-        <label for="title"></label><input required type="text" name="title" id="title" class="form-control" placeholder="Название"><br>
-        <label for="intro"></label><input required name="intro" id="intro" class="form-control" placeholder="Краткое описание"><br>
-        <label for="text"></label><textarea required name="text" id="text" class="form-control" placeholder="Текст"></textarea><br>
-        <label for="priority">Приоритет</label>
-        <select name="priority" id="priority" required class="form-control">
-            <option value="" selected disabled>--Выберите--</option>
-            {% for priority in priorities %}
-                <option value="{{ priority.id }}">{{ priority.name }}</option>
-            {% endfor %}
-        </select>
-        <p></p>
-        <label for="srok">Срок (дедлайн)</label><input required type="datetime-local" name="deadline" id="srok" class="form-control" placeholder="Срок">
-        <p></p>
-        {% endcomment %}
         <input type="submit" class="btn btn-success" value="Добавить">
         <input type="reset" class="btn btn-outline-danger" value="Сброс">
     </form>

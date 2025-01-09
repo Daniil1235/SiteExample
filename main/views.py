@@ -1,13 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Task, Priority
 from .forms import TaskForm
 
 
 def index(request):
-    return render(request, "main/index.html")
+    tasks = Task.objects.all()
+    return render(request, "main/index.html", {"tasks": tasks})
 
 
 def create(request):
-    priorities = Priority.objects.all()
+    error = ''
+    if request.method == "POST":
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+        else:
+            error = 'При отправке формы произошла ошибка.'
     form = TaskForm()
-    return render(request, "main/create.html", {"priorities": priorities, "form": form})
+    return render(request, "main/create.html", {"form": form, "error": error})
