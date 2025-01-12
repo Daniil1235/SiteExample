@@ -1,0 +1,17 @@
+{% extends "main/base.html" %}
+{% block title %}
+    {{ task.name }}
+{% endblock %}
+
+{% block body %}
+    <div class="center">
+        <h1>{{ task.name }}</h1>
+        <h2>{{ task.description }}</h2>
+        <h3>{{ task.text }}</h3>
+        <p>Приоритет: {{ task.priority }}</p>
+        <p>Дата создания: {{ task.create_date }}</p>
+        <p>Срок (дедлайн): {{ task.deadline }}</p>
+        <a href="{{ task.id }}/update" class="btn btn-warning">Изменить</a>
+        <a href="{{ task.id }}/delete" class="btn btn-danger">Удалить</a>
+    </div>
+{% endblock %}

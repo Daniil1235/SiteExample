@@ -21,8 +21,10 @@ class Task(models.Model):
     text = models.TextField('Текст заметки')
     priority = models.ForeignKey('Priority', on_delete=models.CASCADE, verbose_name='Приоритет')
     create_date = models.DateTimeField('Дата создания', default=django.utils.timezone.now, help_text="Не Трогай!!!")
-    change_date = models.DateTimeField('Дата изменения', default=django.utils.timezone.now, help_text="Не Трогай!!!")
     deadline = models.DateTimeField('Дедлайн (срок)')
+
+    def get_absolute_url(self):
+        return f"/tasks/{self.id}"
 
     def __str__(self):
         return self.name

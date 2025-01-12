@@ -7,9 +7,21 @@ class TaskForm(ModelForm):
         model = Task
         fields = ['name', 'description', 'text', 'priority', 'deadline']
         widgets = {
-            'name': TextInput(attrs={'class': 'form-control', 'placeholder': 'Название'}),
-            'description': TextInput(attrs={'class': 'form-control', 'placeholder': 'Краткое описание'}),
-            'text': Textarea(attrs={'class': 'form-control', 'placeholder': 'Текст'}),
-            'priority': Select(attrs={'class': 'form-control', 'placeholder': 'Приоритет', 'style': 'width: 250px;'}),
-            'deadline': DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local', 'style': 'width: 250px;'}),
+            'name': TextInput(attrs={'class': 'form-control',
+                                     'placeholder': 'Название'}),
+
+            'description': TextInput(attrs={'class': 'form-control',
+                                            'placeholder': 'Краткое описание'}),
+
+            'text': Textarea(attrs={'class': 'form-control',
+                                    'placeholder': 'Текст'}),
+
+            'priority': Select(attrs={'class': 'form-control',
+                                      'placeholder': 'Приоритет',
+                                      'style': 'width: 250px;'}),
+
+            'deadline': DateTimeInput(
+                attrs={'class': 'form-control',
+                       'type': 'datetime-local',
+                       'style': 'width: 250px;'}),
         }

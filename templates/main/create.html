@@ -1,27 +1,37 @@
 {% extends "main/base.html" %}
 {% block title %}
-Добавление задачи
+    {{ action }} задачи
 {% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <h1>Добавление задачи</h1>
-    {% if error %}
-        <p class="errornote">{{ error }}</p>
-    {% endif %}
-    <form method="post">
-        {% csrf_token %}
-        {% for el in form %}
-            {% if el.name == 'priority' %}
-                <p>Приоритет</p>
+    <div class="container mt-5">
+        <h1 class="center">{{ action }} задачи</h1>
+        {% if error %}
+            <p class="errornote">{{ error }}</p>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            {% if action_v == "Удалить" %}
+                <h3 class="center">Вы действительно хотите удалить задачу "{{ task.name }} и все её данные?"</h3>
+            {% else %}
+                {% for el in form %}
+                    {% if el.name == 'priority' %}
+                        <p>Приоритет</p>
+                    {% endif %}
+                    {% if el.name == 'deadline' %}
+                        <p>Срок(дедлайн)</p>
+                    {% endif %}
+                    {{ el }}<br>
+                {% endfor %}
             {% endif %}
-            {% if el.name == 'deadline' %}
-                <p>Срок(дедлайн)</p>
+            {% if action_v != "Удалить" %}
+                <input type="submit" class="btn btn-success" value="{{ action_v }}">
+                <input type="reset" class="btn btn-outline-danger" value="Сброс">
+            {% else %}
+                <div class="center">
+                    <input type="submit" class="btn btn-outline-danger" value="{{ action_v }}">
+                </div>
             {% endif %}
-            {{ el }}<br>
-        {% endfor %}
-        <input type="submit" class="btn btn-success" value="Добавить">
-        <input type="reset" class="btn btn-outline-danger" value="Сброс">
-    </form>
-</div>
+        </form>
+    </div>
 {% endblock %}

@@ -10,3 +10,13 @@
     background-position: 5px 12px;
     overflow-wrap: break-word;
 }
+
+.card {
+    width: 18rem;
+    padding: 25px;
+    margin: 50px;
+}
+
+.center {
+    text-align: center;
+}

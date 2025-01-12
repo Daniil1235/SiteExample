@@ -1,10 +1,28 @@
 from django.shortcuts import render, redirect
 from .models import Task, Priority
 from .forms import TaskForm
+from django.views.generic import UpdateView, DeleteView
+
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    template_name = "main/create.html"
+    form_class = TaskForm
+    extra_context = {"action": 'Обновление', "action_v": "Обновить"}
+
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    template_name = "main/create.html"
+    success_url = "/"
+    extra_context = {"action": 'Удаление', "action_v": "Удалить"}
 
 
 def index(request):
-    tasks = Task.objects.all()
+    sort = request.GET.get('sort')
+    if not sort:
+        sort = 'priority'
+    tasks = Task.objects.all().order_by(sort)
     return render(request, "main/index.html", {"tasks": tasks})
 
 
@@ -18,4 +36,11 @@ def create(request):
         else:
             error = 'При отправке формы произошла ошибка.'
     form = TaskForm()
-    return render(request, "main/create.html", {"form": form, "error": error})
+    action = "Добавление"
+    action_v = "Добавить"
+    return render(request, "main/create.html", {"form": form, "error": error, "action": action, "action_v": action_v})
+
+
+def detail_view(request, id):
+    task = Task.objects.get(id=id)
+    return render(request, "main/detail_view.html", {"task": task})

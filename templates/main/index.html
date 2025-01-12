@@ -5,6 +5,15 @@
 {% endblock %}
 
 {% block body %}
-        <h1>Главная</h1>
-
+    <h1>Все заметки</h1>
+    {% for task in tasks %}
+        <div class="card">
+            <div class="card-body">
+                <h5>{{ task.name }}</h5>
+                <p>{{ task.description }}</p>
+                <p>{{ task.deadline }}</p>
+                <a href="/tasks/{{ task.id }}" class="btn btn-primary">Подробнее</a>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
