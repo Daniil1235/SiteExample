@@ -4,18 +4,18 @@
 {% endblock %}
 
 {% block body %}
-    <div class="center features">
+    <div class="features">
         {% if messages %}
             {% for message in messages %}
                 <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
             {% endfor %}
         {% endif %}
-        <h1>{{ task.name }}</h1>
-        <h2>{{ task.description }}</h2>
-        <h3>{{ task.text }}</h3>
+        <h1>{{ task.name }}</h1><br>
+        <h2>{{ task.description }}</h2><br>
+        <h3>{{ task.text }}</h3><br>
         <p>Приоритет: {{ task.priority }}</p>
         <p>Дата создания: {{ task.create_date }}</p>
-        <p>Срок (дедлайн): {{ task.deadline }}</p>
+        <p>Срок (дедлайн): {{ task.deadline }}</p><br>
         <a href="{{ task.id }}/update" class="btn btn-warning">Изменить</a>
         <a href="{{ task.id }}/delete" class="btn btn-danger">Удалить</a>
     </div>
