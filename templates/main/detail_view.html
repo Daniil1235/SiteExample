@@ -4,7 +4,12 @@
 {% endblock %}
 
 {% block body %}
-    <div class="center">
+    <div class="center features">
+        {% if messages %}
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        {% endif %}
         <h1>{{ task.name }}</h1>
         <h2>{{ task.description }}</h2>
         <h3>{{ task.text }}</h3>

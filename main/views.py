@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Task, Priority
-from .forms import TaskForm
+from .forms import TaskForm, NewUserForm
 from django.views.generic import UpdateView, DeleteView
+from django.contrib.auth import login
+from django.contrib import messages
 
 
 class TaskUpdateView(UpdateView):
@@ -44,3 +46,16 @@ def create(request):
 def detail_view(request, id):
     task = Task.objects.get(id=id)
     return render(request, "main/detail_view.html", {"task": task})
+
+
+def register_request(request):
+    if request.method == "POST":
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Успешная регистрация")
+            return redirect("home")
+        messages.error(request, "При регистрации произошла ошибка. Убедитесь, что данные введены верно")
+    form = NewUserForm()
+    return render(request=request, template_name="main/register.html", context={"register_form": form})

@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+{% block title %} Регистрация {% endblock %}
+{% block body %}
+    {% load crispy_forms_tags %}
+    <div class="features">
+        {% if messages %}
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        {% endif %}
+        <h1>Регистрация</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ register_form|crispy }}
+            <button class="btn btn-primary" type="submit">Регистрация</button>
+        </form>
+        <p class="text-center">Если у вас уже есть аккаунт, <a href="/login">войдите</a> в систему</p>
+    </div>
+
+{% endblock %}

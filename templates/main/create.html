@@ -4,12 +4,15 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h1 class="center">{{ action }} задачи</h1>
-        {% if error %}
-            <p class="errornote">{{ error }}</p>
+    {% load crispy_forms_tags %}
+    <div class="container mt-5 features">
+        {% if messages %}
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
         {% endif %}
-        <form method="post">
+        <h1 class="center">{{ action }} задачи</h1>
+        <form method="post" class="left">
             {% csrf_token %}
             {% if action_v == "Удалить" %}
                 <h3 class="center">Вы действительно хотите удалить задачу "{{ task.name }} и все её данные?"</h3>
@@ -30,6 +33,7 @@
             {% else %}
                 <div class="center">
                     <input type="submit" class="btn btn-outline-danger" value="{{ action_v }}">
+                    <a class="btn btn-success" href="/tasks/{{ task.id }}">Отмена</a>
                 </div>
             {% endif %}
         </form>

@@ -1,5 +1,8 @@
 from .models import Task
-from django.forms import ModelForm, Textarea, TextInput, DateTimeInput, Select
+from django.forms import ModelForm, Textarea, TextInput, DateTimeInput, Select, RadioSelect
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
 class TaskForm(ModelForm):
@@ -16,12 +19,26 @@ class TaskForm(ModelForm):
             'text': Textarea(attrs={'class': 'form-control',
                                     'placeholder': 'Текст'}),
 
-            'priority': Select(attrs={'class': 'form-control',
-                                      'placeholder': 'Приоритет',
-                                      'style': 'width: 250px;'}),
+            'priority': RadioSelect(attrs={'placeholder': 'Приоритет'}),
 
             'deadline': DateTimeInput(
                 attrs={'class': 'form-control',
                        'type': 'datetime-local',
                        'style': 'width: 250px;'}),
         }
+
+
+
+class NewUserForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ("username", "email", "password1", "password2")
+
+    def save(self, commit=True):
+        user = super(NewUserForm, self).save(commit=False)
+        user.email = self.cleaned_data['email']
+        if commit:
+            user.save()
+        return user

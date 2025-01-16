@@ -5,15 +5,20 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Все заметки</h1>
-    {% for task in tasks %}
-        <div class="card">
-            <div class="card-body">
+    <div class="features">
+        {% if messages %}
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        {% endif %}
+        <h1 class="center">Все задачи</h1>
+        {% for task in tasks %}
+            <div class="alert alert-warning">
                 <h5>{{ task.name }}</h5>
                 <p>{{ task.description }}</p>
                 <p>{{ task.deadline }}</p>
                 <a href="/tasks/{{ task.id }}" class="btn btn-primary">Подробнее</a>
             </div>
-        </div>
-    {% endfor %}
+            </div>
+        {% endfor %}
 {% endblock %}
